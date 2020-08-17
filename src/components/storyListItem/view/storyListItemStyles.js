@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    marginVertical: 5
+    marginVertical: 0
   },
   unPressedAvatar: {
     borderColor: "#e95950"
@@ -11,24 +11,28 @@ export default StyleSheet.create({
     borderColor: "#ebebeb"
   },
   avatarWrapper: {
-    borderWidth: 2,
+    // borderWidth: 2,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "#e95950",
     margin: 8,
-    borderRadius: 57 / 2,
-    height: 57,
-    width: 57
+    borderRadius: 20,
+    height: 135,
+    width: 90
   },
   avatar: {
-    height: 50,
-    width: 50,
-    borderRadius: 50 / 2,
-    borderColor: "white",
-    borderWidth: 1
+    height: 135,
+    width: 90,
+    borderRadius: 20,
+    backgroundColor:"#000"
   },
   itemText: {
     textAlign: "center",
     fontSize: 9
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.45)',
+    borderRadius:20
   }
 });

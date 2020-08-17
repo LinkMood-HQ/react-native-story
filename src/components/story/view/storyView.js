@@ -41,35 +41,23 @@ class StoryListView extends Component {
       stories,
       footerComponent,
       unPressedBorderColor,
-      pressedBorderColor
+      pressedBorderColor,
+      handleStoryItemPress,
+      hasNotClickedRecommendation
     } = this.props;
     const { isModalOpen, orderedStories, selectedStory } = this.state;
 
     return (
       <Fragment>
-        <View style={styles.storyListContainer}>
+        <View style={{...styles.storyListContainer, display:"flex", flexDirection:"row",backgroundColor: '#fff', marginTop:0, marginBottom: 0,paddingTop:0, paddingBottom: 10}}>
           <StoryList
-            handleStoryItemPress={this._handleStoryItemPress}
+            hasNotClickedRecommendation={hasNotClickedRecommendation}
+            handleStoryItemPress={handleStoryItemPress}
             stories={stories}
             unPressedBorderColor={unPressedBorderColor}
             pressedBorderColor={pressedBorderColor}
           />
         </View>
-        <Modal
-          style={styles.modal}
-          isOpen={isModalOpen}
-          onClosed={() => this.setState({ isModalOpen: false })}
-          position="center"
-          swipeToClose
-          swipeArea={250}
-          backButtonClose
-        >
-          <Stories
-            footerComponent={footerComponent}
-            selectedStory={selectedStory}
-            stories={orderedStories}
-          />
-        </Modal>
       </Fragment>
     );
   }

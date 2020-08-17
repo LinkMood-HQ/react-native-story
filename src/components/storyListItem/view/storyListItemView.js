@@ -6,6 +6,7 @@ import DEFAULT_AVATAR from "../../../assets/avatars/no_avatar.png";
 
 // Components
 import styles from "./storyListItemStyles";
+import FastImage from "react-native-fast-image";
 
 class StoryListItemView extends Component {
   constructor(props) {
@@ -26,10 +27,11 @@ class StoryListItemView extends Component {
     this.setState({ isPressed: true });
   };
 
-  render() {
-    const { item, unPressedBorderColor, pressedBorderColor } = this.props;
-    const { isPressed } = this.state;
 
+
+  render() {
+    const { item, unPressedBorderColor, pressedBorderColor, hasNotClickedRecommendation } = this.props;
+    const { isPressed } = this.state;
     return (
       <View style={styles.container}>
         <TouchableOpacity
@@ -38,24 +40,31 @@ class StoryListItemView extends Component {
             styles.avatarWrapper,
             !isPressed
               ? {
-                  borderColor: unPressedBorderColor
-                    ? unPressedBorderColor
-                    : "#e95950"
-                }
+                borderColor: unPressedBorderColor
+                  ? unPressedBorderColor
+                  : "#e95950",
+              }
               : {
-                  borderColor: pressedBorderColor
-                    ? pressedBorderColor
-                    : "#ebebeb"
-                }
+                borderColor: pressedBorderColor
+                  ? pressedBorderColor
+                  : "#ebebeb",
+
+                // opacity: 0.5
+              }
           ]}
         >
-          <Image
+          <FastImage
             style={styles.avatar}
-            source={item.avatar}
-            defaultSource={DEFAULT_AVATAR}
+            source={{
+              uri: item.picture ? item.picture : item.backdrop_path ? `https://image.tmdb.org/t/p/original/${item.backdrop_path}` : ((item.photos || []).length > 0) ? item.photos[0] : item.image_url,
+              priority: FastImage.priority.high,
+            }}
           />
+
+          <View style={styles.overlay} />
+          <Text style={{ ...styles.itemText, fontSize: 10, textTransform: 'capitalize', fontWeight: "800", color: "#fff", position: "absolute", top: 50, padding: 5 }}>{item.title ? item.title : item.name}</Text>
+
         </TouchableOpacity>
-        <Text style={styles.itemText}>{item.user}</Text>
       </View>
     );
   }
