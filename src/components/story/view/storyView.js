@@ -43,7 +43,9 @@ class StoryListView extends Component {
       unPressedBorderColor,
       pressedBorderColor,
       handleStoryItemPress,
-      hasNotClickedRecommendation
+      hasNotClickedRecommendation,
+      isSearching,
+      isHostedInChat
     } = this.props;
     const { isModalOpen, orderedStories, selectedStory } = this.state;
 
@@ -54,6 +56,8 @@ class StoryListView extends Component {
             hasNotClickedRecommendation={hasNotClickedRecommendation}
             handleStoryItemPress={handleStoryItemPress}
             stories={stories}
+            isHostedInChat={isHostedInChat}
+            isSearching={isSearching}
             unPressedBorderColor={unPressedBorderColor}
             pressedBorderColor={pressedBorderColor}
           />

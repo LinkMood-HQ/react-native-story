@@ -20,9 +20,13 @@ class StoryListView extends Component {
   static getDerivedStateFromProps(props, state) {
     if (props.stories != null && _.isArray(props.stories) && props.stories !== state.stories) {     
       return {
-        stories: Object.keys(props.stories.sort((a,b) => (a.ranking > b.ranking) ? 1 : ((b.ranking > a.ranking) ? -1 : 0)).reverse()).slice(0,30)
+        stories: props.isSearching ? Object.keys(props.stories) : Object.keys(props.stories.sort((a,b) => (a.ranking > b.ranking) ? 1 : ((b.ranking > a.ranking) ? -1 : 0)).reverse()).slice(0,30)
       }
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.stories != nextProps.stories;
   }
 
   updateOffset() {
@@ -59,7 +63,9 @@ class StoryListView extends Component {
       handleStoryItemPress,
       unPressedBorderColor,
       pressedBorderColor,
-      hasNotClickedRecommendation
+      hasNotClickedRecommendation,
+      isSearching,
+      isHostedInChat
     } = this.props;
 
     return (
@@ -80,6 +86,8 @@ class StoryListView extends Component {
                 handleStoryItemPress={() =>
                   handleStoryItemPress && handleStoryItemPress(stories[item], index)
                 }
+                isHostedInChat={isHostedInChat}
+                index={index}
                 isFirst={index === 0}
                 unPressedBorderColor={unPressedBorderColor}
                 pressedBorderColor={pressedBorderColor}

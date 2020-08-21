@@ -7,6 +7,8 @@ import DEFAULT_AVATAR from "../../../assets/avatars/no_avatar.png";
 // Components
 import styles from "./storyListItemStyles";
 import FastImage from "react-native-fast-image";
+import { Badge } from "react-native-elements";
+import theme from "../../../../../../src/config/theme";
 
 class StoryListItemView extends Component {
   constructor(props) {
@@ -49,7 +51,6 @@ class StoryListItemView extends Component {
                   ? pressedBorderColor
                   : "#ebebeb",
 
-                // opacity: 0.5
               }
           ]}
         >
@@ -64,6 +65,13 @@ class StoryListItemView extends Component {
           <View style={styles.overlay} />
           <Text style={{ ...styles.itemText, fontSize: 10, textTransform: 'capitalize', fontWeight: "800", color: "#fff", position: "absolute", top: 50, padding: 5 }}>{item.title ? item.title : item.name}</Text>
 
+          {this.props.isHostedInChat === true && <Badge
+            status="error"
+            value={this.props.index + 1}
+            textStyle={{ fontWeight: "800" }}
+            badgeStyle={{ width: 25, height: 25, borderRadius: 20, backgroundColor: theme.COLORS.LINKMOOD, borderWidth: 0 }}
+            containerStyle={{ position: 'absolute', top: -5, right: -5 }}
+          />}
         </TouchableOpacity>
       </View>
     );
